@@ -1,0 +1,73 @@
+# Stores the power bloc members whose laws lower cohesion for the bloc's identity on this country,
+# so the cohesion tooltips can name them (localization can't iterate bloc members).
+# A bloc has one identity, so the same variables serve all incompatibility tooltips.
+cst_refresh_incompatible_members = {
+	remove_variable = cst_member_1
+	remove_variable = cst_member_2
+	remove_variable = cst_member_3
+	remove_variable = cst_member_4
+	remove_variable = cst_member_5
+	remove_variable = cst_more
+	if = {
+		limit = {
+			is_in_power_bloc = yes
+			power_bloc = {
+				OR = {
+					has_identity = identity:identity_religious
+					has_identity = identity:identity_military_treaty_organization
+					has_identity = identity:identity_cultural
+				}
+			}
+		}
+		save_scope_as = cst_owner
+		power_bloc = {
+			every_power_bloc_member = {
+				limit = {
+					OR = {
+						AND = {
+							power_bloc = { has_identity = identity:identity_religious }
+							OR = {
+								has_law_or_variant = law_type:law_total_separation
+								has_law_or_variant = law_type:law_state_atheism
+							}
+						}
+						AND = {
+							power_bloc = { has_identity = identity:identity_military_treaty_organization }
+							has_law_or_variant = law_type:law_national_militia
+						}
+						AND = {
+							power_bloc = { has_identity = identity:identity_cultural }
+							has_law_or_variant = law_type:law_multicultural
+						}
+					}
+				}
+				save_scope_as = cst_member
+				scope:cst_owner = {
+					if = {
+						limit = { NOT = { has_variable = cst_member_1 } }
+						set_variable = { name = cst_member_1 value = scope:cst_member }
+					}
+					else_if = {
+						limit = { NOT = { has_variable = cst_member_2 } }
+						set_variable = { name = cst_member_2 value = scope:cst_member }
+					}
+					else_if = {
+						limit = { NOT = { has_variable = cst_member_3 } }
+						set_variable = { name = cst_member_3 value = scope:cst_member }
+					}
+					else_if = {
+						limit = { NOT = { has_variable = cst_member_4 } }
+						set_variable = { name = cst_member_4 value = scope:cst_member }
+					}
+					else_if = {
+						limit = { NOT = { has_variable = cst_member_5 } }
+						set_variable = { name = cst_member_5 value = scope:cst_member }
+					}
+					else = {
+						set_variable = cst_more
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Power Bloc Expanded Tooltips (1.15)",
+  "id": "power_bloc_expanded_tooltips",
+  "version": "1.0",
+  "supported_game_version": "1.15.*",
+  "short_description": "Names the power bloc members whose laws lower cohesion (Religious, Military Treaty Organization, Cultural identities).",
+  "tags": [
+    "Interface"
+  ],
+  "relationships": [],
+  "game_custom_data": {
+    "multiplayer_synchronized": true
+  }
+}

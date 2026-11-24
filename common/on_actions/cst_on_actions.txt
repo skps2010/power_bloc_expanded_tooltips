@@ -1,0 +1,35 @@
+on_game_started = {
+	on_actions = { cst_refresh_all }
+}
+
+on_monthly_pulse_country = {
+	on_actions = { cst_refresh_country }
+}
+
+# Root = law; refresh every member of the owner's bloc right away
+on_law_activated = {
+	on_actions = { cst_refresh_law_owner_bloc }
+}
+
+cst_refresh_all = {
+	effect = {
+		every_country = { cst_refresh_incompatible_members = yes }
+	}
+}
+
+cst_refresh_country = {
+	effect = { cst_refresh_incompatible_members = yes }
+}
+
+cst_refresh_law_owner_bloc = {
+	effect = {
+		owner ?= {
+			if = {
+				limit = { is_in_power_bloc = yes }
+				power_bloc = {
+					every_power_bloc_member = { cst_refresh_incompatible_members = yes }
+				}
+			}
+		}
+	}
+}
